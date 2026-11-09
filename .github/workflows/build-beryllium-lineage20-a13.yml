@@ -10,7 +10,7 @@ env:
   DEVICE_CODENAME : "beryllium"
 
   CUSTOM_CMDS : ""
-  EXTRA_CMDS : ""
+  EXTRA_CMDS : "KCFLAGS=-Wno-error"
 
   KERNEL_SOURCE : "https://github.com/IniGwYaN/android_kernel_xiaomi_sdm845.git"
   KERNEL_BRANCH : "lineage-20"
