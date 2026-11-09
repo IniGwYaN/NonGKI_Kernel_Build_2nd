@@ -120,7 +120,7 @@ jobs:
       - name: 🪛 Extra Kernel Options (perf/adem/ram)
         run: |
           cd $GITHUB_WORKSPACE/device_kernel
-          KCFG=vendor/xiaomi/beryllium.config
+          KCFG=arch/arm64/configs/vendor/xiaomi/beryllium.config
           add() { grep -qxF "$1" "$KCFG" || echo "$1" >> "$KCFG"; }
           add 'CONFIG_CPU_FREQ_GOV_INTERACTIVE=y'
           add 'CONFIG_MSM_PERFORMANCE=y'
