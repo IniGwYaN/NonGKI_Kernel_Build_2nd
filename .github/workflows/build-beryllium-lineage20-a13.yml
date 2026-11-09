@@ -126,7 +126,12 @@ jobs:
           add 'CONFIG_MSM_PERFORMANCE=y'
           add 'CONFIG_CPU_BOOST=y'
           add 'CONFIG_IOSCHED_DEADLINE=y'
-          add 'CONFIG_IOSCHED_BFQ=y'
+          add 'CONFIG_IOSCHED_ANXIETY=y'
+          add 'CONFIG_IOSCHED_MAPLE=y'
+          add 'CONFIG_IOSCHED_ZEN=y'
+          add 'CONFIG_IOSCHED_TRIPNDROID=y'
+          add 'CONFIG_IOSCHED_FIOPS=y'
+          add 'CONFIG_IOSCHED_SIO=y'
           add 'CONFIG_DEFAULT_IOSCHED="deadline"'
           add 'CONFIG_TCP_CONG_WESTWOOD=y'
           add 'CONFIG_DEFAULT_TCP_CONG="westwood"'
@@ -148,21 +153,9 @@ jobs:
           sed -i 's/(80 \* USEC_PER_MSEC)/(40 * USEC_PER_MSEC)/' drivers/cpufreq/cpufreq_interactive.c
           sed -i 's/int vm_swappiness = 60;/int vm_swappiness = 120;/' mm/vmscan.c
 
-      - name: Backport BFQ scheduler
+      - name: Backport extra I/O schedulers
         run: |
-          cd $GITHUB_WORKSPACE/device_kernel
-          B="https://raw.githubusercontent.com/F-19-F/android_kernel_oneplus_msm8998/lineage-20/block"
-          for f in bfq-iosched.c bfq-ioc.c bfq-sched.c bfq-cgroup.c bfq.h; do
-            curl -fsSL "$B/$f" -o block/$f
-          done
-          grep -q 'IOSCHED_BFQ' block/Kconfig.iosched || {
-            echo 'config IOSCHED_BFQ' >> block/Kconfig.iosched;
-            echo 'tristate "BFQ I/O scheduler"' >> block/Kconfig.iosched;
-            echo 'default y' >> block/Kconfig.iosched;
-            echo '---help---' >> block/Kconfig.iosched;
-            echo 'BFQ I/O scheduler.' >> block/Kconfig.iosched;
-          }
-          grep -q 'bfq-iosched.o' block/Makefile || echo 'obj-$(CONFIG_IOSCHED_BFQ) += bfq-iosched.o' >> block/Makefile
+          bash $GITHUB_WORKSPACE/misc/iosched_prep.sh
       - name: 🚀 Build Process
         uses: ./.github/workflows/build-process
 
@@ -171,3 +164,4 @@ jobs:
 
       - name: ✏️ Upload Artifacts
         uses: ./.github/workflows/upload-files
+
