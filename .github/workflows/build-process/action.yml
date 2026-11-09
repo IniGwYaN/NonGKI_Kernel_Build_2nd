@@ -132,11 +132,11 @@ runs:
             echo "===================="
 
             if [[ "${{ env.BASEBAND_GUARD_ENABLE }}" == "true" ]]; then
-                make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
+                make -j$(nproc --all) ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
                 echo "[+] Pre-built SELinux done."
             fi
 
-            make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" 2>&1|tee error.log
+            make -j$(nproc --all) ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" 2>&1|tee error.log
           fi
           }
 
