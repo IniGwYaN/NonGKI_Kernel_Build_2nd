@@ -385,7 +385,7 @@ runs:
         run: |
           if [ "${{ env.SYSTEM_VERSION }}" == "newer" ] || [ "${{ env.SYSTEM_VERSION }}" == "older" ] || [ "${{ env.SYSTEM_VERSION }}" == "oldest" ]; then
             echo "::group::[+] Starting install GNU GCC..."
-            sudo apt install binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu
+            sudo apt install binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu -y
             sudo apt install gcc-arm-linux-gnueabi -y
 
             echo "GCC_64=CROSS_COMPILE=aarch64-linux-gnu-" >> $GITHUB_ENV
