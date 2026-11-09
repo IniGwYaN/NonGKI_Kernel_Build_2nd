@@ -100,6 +100,11 @@ jobs:
       - name: ⏰ Checkout repository
         uses: actions/checkout@v6
 
+      - name: 🛠️ Install sudo
+        run: |
+          apt-get update
+          apt-get install -y sudo
+
       - name: ⌛️ Compilation environment preparation
         uses: ./.github/workflows/build-env
 
