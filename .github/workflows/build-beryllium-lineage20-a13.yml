@@ -134,6 +134,11 @@ jobs:
           add 'CONFIG_ZSMALLOC=y'
           add 'CONFIG_SWAP=y'
           add 'CONFIG_CLEANCACHE=y'
+          add 'CONFIG_THERMAL_GOV_POWER_ALLOCATOR=y'
+          add 'CONFIG_CPU_FREQ_GOV_SCHEDUTIL=y'
+          add 'CONFIG_HZ_300=y'
+          add 'CONFIG_ZRAM_WRITEBACK=y'
+
 
       - name: 🚀 Build Process
         uses: ./.github/workflows/build-process
