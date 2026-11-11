@@ -153,6 +153,12 @@ jobs:
           sed -i 's/(80 \* USEC_PER_MSEC)/(40 * USEC_PER_MSEC)/' drivers/cpufreq/cpufreq_interactive.c
           sed -i 's/int vm_swappiness = 60;/int vm_swappiness = 120;/' mm/vmscan.c
 
+      - name: GPU LMH unlock (fix GPU stuck at 257MHz)
+        run: |
+          cd $GITHUB_WORKSPACE
+          cp gpu_lmh_unlock.c device_kernel/drivers/thermal/qcom/msm_lmh_dcvs.c
+          echo '[+] Applied GPU LMH unlock'
+
       - name: Backport extra I/O schedulers
         run: |
           bash $GITHUB_WORKSPACE/misc/iosched_prep.sh
