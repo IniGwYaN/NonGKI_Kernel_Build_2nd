@@ -13,7 +13,7 @@ env:
   EXTRA_CMDS : "KCFLAGS=-Wno-error"
 
   KERNEL_SOURCE : "https://github.com/IniGwYaN/android_kernel_xiaomi_sdm845.git"
-  KERNEL_BRANCH : "lineage-20"
+  KERNEL_BRANCH : "v0.5.5-playtest"
 
   CLANG_SOURCE : ""
   CLANG_BRANCH : ""
